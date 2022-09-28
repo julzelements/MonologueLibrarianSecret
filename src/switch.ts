@@ -1,4 +1,8 @@
-class Switch extends Knob {
+import { Knob } from "./knob";
+
+export class Switch extends Knob {
+  value: number
+  name: string
   constructor(name: string, value: any) {
     super(name, value);
   }
@@ -8,7 +12,7 @@ class Switch extends Knob {
   }
 }
 
-class PercentSwitch extends Switch {
+export class PercentSwitch extends Switch {
   value: number;
   constructor(name: string, value: number) {
     super(name, value);
@@ -19,7 +23,8 @@ class PercentSwitch extends Switch {
   }
 }
 
-class OnOffSwitch extends Switch {
+export class OnOffSwitch extends Switch {
+  value: number
   constructor(name: string, value: number) {
     super(name, value);
   }
@@ -29,7 +34,7 @@ class OnOffSwitch extends Switch {
   }
 }
 
-class StepResolutionSwith extends Switch {
+export class StepResolutionSwith extends Switch {
   value: number;
   constructor(value: any) {
     super("Step Resolution", value);
@@ -40,7 +45,7 @@ class StepResolutionSwith extends Switch {
   }
 }
 
-const WAVE_TYPE_SWITCH_OSCILLATOR = {
+export const WAVE_TYPE_SWITCH_OSCILLATOR = {
   VCO1: 0,
   VCO2: 1,
   LFO: 2,
@@ -51,8 +56,9 @@ const WAVE_TYPE_SWITCH_OSCILLATOR = {
   },
 };
 
-class WaveTypeSwitch extends Switch {
+export class WaveTypeSwitch extends Switch {
   oscillator: number;
+  value: number
 
   constructor(oscillator: number, value: number) {
     super("Wave", value);
@@ -77,7 +83,8 @@ class WaveTypeSwitch extends Switch {
   }
 }
 
-class DutySwitch extends Switch {
+export class DutySwitch extends Switch {
+  value: number
   constructor(value: number) {
     super("Duty", value);
   }
@@ -96,7 +103,8 @@ class DutySwitch extends Switch {
   }
 }
 
-class OctaveSwitch extends Switch {
+export class OctaveSwitch extends Switch {
+  value: number
   constructor(value: number) {
     super("Octave", value);
   }
@@ -116,7 +124,8 @@ class OctaveSwitch extends Switch {
   }
 }
 
-class EnvelopeSwitch extends Switch {
+export class EnvelopeSwitch extends Switch {
+  value: number
   constructor(value: number) {
     super("Envelope Type", value);
   }
@@ -135,7 +144,7 @@ class EnvelopeSwitch extends Switch {
   }
 }
 
-const TARGET_SWITCH_TYPE = {
+export const TARGET_SWITCH_TYPE = {
   ENVELOPE: 0,
   LFO: 1,
   properties: {
@@ -144,7 +153,8 @@ const TARGET_SWITCH_TYPE = {
   },
 };
 
-class TargetSwitch extends Switch {
+export class TargetSwitch extends Switch {
+  value: number
   type: any
 
   constructor(type: any, value: number) {
@@ -167,7 +177,8 @@ class TargetSwitch extends Switch {
 }
 
 
-class LFOModeSwitch extends Switch {
+export class LFOModeSwitch extends Switch {
+  value: number
   constructor(value: number) {
     super("LFO Mode", value);
   }

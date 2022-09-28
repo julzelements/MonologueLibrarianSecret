@@ -1,4 +1,4 @@
-class Knob {
+export class Knob {
   name: string;
   value: number | string;
   constructor(name: string, value: number | string) {
@@ -19,7 +19,7 @@ class Knob {
   }
 }
 
-class GateTimeKnob extends Knob {
+export class GateTimeKnob extends Knob {
   value: number;
   constructor(value: number) {
     super("GateTime", value);

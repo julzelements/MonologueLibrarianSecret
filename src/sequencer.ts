@@ -1,4 +1,8 @@
-class Sequencer {
+import { Key } from "./key";
+import { Knob, GateTimeKnob } from "./knob";
+import { StepResolutionSwith, OnOffSwitch, Switch } from "./switch";
+
+export class Sequencer {
     bpm: Knob;
     stepLength: Knob;
     stepResolution: StepResolutionSwith;
@@ -29,7 +33,7 @@ class Sequencer {
     }
   }
   
-  class MotionSlotParams {
+  export class MotionSlotParams {
     slotNumber: number;
     active: OnOffSwitch;
     smooth: OnOffSwitch;
@@ -51,7 +55,7 @@ class Sequencer {
     }
   }
   
-  class Step {
+  export class Step {
     stepNumber: number;
     active: OnOffSwitch;
     motionActive: OnOffSwitch;
@@ -76,7 +80,7 @@ class Sequencer {
     }
   }
   
-  class SequencerEvent {
+  export class SequencerEvent {
     note: Note;
     motionSlotsData: any[][];
     constructor(note: Note, motionSlotsData: any[][]) {
@@ -89,7 +93,7 @@ class Sequencer {
     }
   }
   
-  class Note {
+  export class Note {
     key: Key;
     velocity: Knob;
     gateTime: GateTimeKnob;

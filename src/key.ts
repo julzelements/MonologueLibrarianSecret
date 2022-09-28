@@ -1,4 +1,6 @@
-class Key extends Knob {
+import { Knob } from "./knob";
+
+export class Key extends Knob {
   value: number;
   constructor(value: number) {
     super("Key", value);

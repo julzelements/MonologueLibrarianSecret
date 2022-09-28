@@ -1,10 +1,15 @@
+import { Key } from "./key";
+import { GateTimeKnob, Knob } from "./knob";
+import { oscillator, Filter, Envelope, LFO, MiscParams } from "./parameters";
+import { Sequencer, Step, MotionSlotParams, Note, SequencerEvent } from "./sequencer";
+import { DutySwitch, EnvelopeSwitch, LFOModeSwitch, OctaveSwitch, OnOffSwitch, PercentSwitch, StepResolutionSwith, Switch, TargetSwitch, TARGET_SWITCH_TYPE, WaveTypeSwitch, WAVE_TYPE_SWITCH_OSCILLATOR } from "./switch";
 import { addLowerBits, bin, getBits } from "./utilities";
 
 Array.prototype.toString = function () {
   return this.join("");
 };
 
-class Monologue {
+export class Monologue {
   patchName: string;
   drive: Knob;
   oscillators: any;
@@ -93,7 +98,7 @@ class Monologue {
     function oscOneFromSysEx(data: number[]) {
       // Waveform
       const wave = new WaveTypeSwitch(
-        WaveTypeSwitch.oscillator.VCO1,
+        WAVE_TYPE_SWITCH_OSCILLATOR.VCO1,
         getBits(data[30], 6, 7)
       );
 
@@ -111,7 +116,7 @@ class Monologue {
     function oscTwoFromSysEx(data: number[]) {
       // Waveform
       const wave = new WaveTypeSwitch(
-        WaveTypeSwitch.oscillator.VCO2,
+        WAVE_TYPE_SWITCH_OSCILLATOR.VCO2,
         getBits(data[31], 6, 7)
       );
 
@@ -156,7 +161,7 @@ class Monologue {
 
       // target
       const target = new TargetSwitch(
-        TargetSwitch.Type.ENVELOPE,
+        TARGET_SWITCH_TYPE.ENVELOPE,
         getBits(data[34], 6, 7)
       );
 
@@ -166,7 +171,7 @@ class Monologue {
     function lfoFromSysEx(data: number[]) {
       // wave
       const wave = new WaveTypeSwitch(
-        WaveTypeSwitch.oscillator.LFO,
+        WAVE_TYPE_SWITCH_OSCILLATOR.LFO,
         getBits(data[36], 0, 1)
       );
 
@@ -184,7 +189,7 @@ class Monologue {
 
       // TargetSwitch
       const target = new TargetSwitch(
-        TargetSwitch.Type.LFO,
+        TARGET_SWITCH_TYPE.LFO,
         getBits(data[36], 4, 5)
       );
 
@@ -348,15 +353,3 @@ class Monologue {
   }
 
 }*/
-
-
-
-
-
-
-
-
-
-
-
-module.exports = Monologue;
