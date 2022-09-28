@@ -7,7 +7,6 @@ const file = fs.readFileSync(`${__dirname}/sample_program_dump.csv`, "utf8");
 
 describe("Snapshot test", () => {
   it("renders the sample_program_dump correctly", () => {
-    console.log(__dirname);
     const records = parse(file)[0];
     const data = transformDataFrom7BitTo8Bit(records);
     expect(Monologue.createFromSysEx(data).toString()).toMatchSnapshot();

@@ -1,9 +1,9 @@
 import { Knob } from "./knob";
 
 export class Switch extends Knob {
-  value: number
-  name: string
-  constructor(name: string, value: any) {
+  value: number;
+  name: string;
+  constructor(name: string, value: number) {
     super(name, value);
   }
 
@@ -24,7 +24,7 @@ export class PercentSwitch extends Switch {
 }
 
 export class OnOffSwitch extends Switch {
-  value: number
+  value: number;
   constructor(name: string, value: number) {
     super(name, value);
   }
@@ -36,7 +36,7 @@ export class OnOffSwitch extends Switch {
 
 export class StepResolutionSwith extends Switch {
   value: number;
-  constructor(value: any) {
+  constructor(value: number) {
     super("Step Resolution", value);
   }
 
@@ -45,22 +45,17 @@ export class StepResolutionSwith extends Switch {
   }
 }
 
-export const WAVE_TYPE_SWITCH_OSCILLATOR = {
-  VCO1: 0,
-  VCO2: 1,
-  LFO: 2,
-  properties: {
-    0: { name: "VCO1" },
-    1: { name: "VCO2" },
-    2: { name: "LFO" },
-  },
-};
+export enum OSCILLATOR {
+  VCO1 = 0,
+  VCO2 = 1,
+  LFO = 2,
+}
 
 export class WaveTypeSwitch extends Switch {
-  oscillator: number;
-  value: number
+  oscillator: OSCILLATOR;
+  value: number;
 
-  constructor(oscillator: number, value: number) {
+  constructor(oscillator: OSCILLATOR, value: number) {
     super("Wave", value);
     this.oscillator = oscillator;
   }
@@ -72,7 +67,7 @@ export class WaveTypeSwitch extends Switch {
       case 1:
         return "Triangle";
       case 0:
-        if (this.oscillator === 1) {
+        if (this.oscillator === OSCILLATOR.VCO2) {
           return "Noise";
         } else {
           return "Square";
@@ -84,7 +79,7 @@ export class WaveTypeSwitch extends Switch {
 }
 
 export class DutySwitch extends Switch {
-  value: number
+  value: number;
   constructor(value: number) {
     super("Duty", value);
   }
@@ -104,7 +99,7 @@ export class DutySwitch extends Switch {
 }
 
 export class OctaveSwitch extends Switch {
-  value: number
+  value: number;
   constructor(value: number) {
     super("Octave", value);
   }
@@ -125,7 +120,7 @@ export class OctaveSwitch extends Switch {
 }
 
 export class EnvelopeSwitch extends Switch {
-  value: number
+  value: number;
   constructor(value: number) {
     super("Envelope Type", value);
   }
@@ -144,20 +139,16 @@ export class EnvelopeSwitch extends Switch {
   }
 }
 
-export const TARGET_SWITCH_TYPE = {
-  ENVELOPE: 0,
-  LFO: 1,
-  properties: {
-    0: { name: "Envelope" },
-    1: { name: "LFO" },
-  },
-};
+export enum TARGET {
+  ENVELOPE = 0,
+  LFO = 1,
+}
 
 export class TargetSwitch extends Switch {
-  value: number
-  type: any
+  value: number;
+  type: TARGET;
 
-  constructor(type: any, value: number) {
+  constructor(type: TARGET, value: number) {
     super("Target", value);
     this.type = type;
   }
@@ -167,7 +158,7 @@ export class TargetSwitch extends Switch {
       case 0:
         return "Cutoff";
       case 1:
-        return this.type == TARGET_SWITCH_TYPE.LFO ? "Shape" : "Pitch 2";
+        return this.type == TARGET.LFO ? "Shape" : "Pitch 2";
       case 2:
         return "Pitch";
       default:
@@ -176,9 +167,8 @@ export class TargetSwitch extends Switch {
   }
 }
 
-
 export class LFOModeSwitch extends Switch {
-  value: number
+  value: number;
   constructor(value: number) {
     super("LFO Mode", value);
   }

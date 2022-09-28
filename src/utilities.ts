@@ -23,7 +23,7 @@ export const addHighBit = (numForLowBits: number, numForHighBit: number, offset:
   return parseInt(eightBitString,2);
 }
 
-export const transformDataFrom7BitTo8Bit = (records: string | any[]) => {
+export const transformDataFrom7BitTo8Bit = (records: number[]) => {
 
   // remove the the header and footer bytes
   const sBitValues = records.slice(7,records.length - 1);

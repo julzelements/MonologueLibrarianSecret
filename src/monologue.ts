@@ -2,7 +2,7 @@ import { Key } from "./key";
 import { GateTimeKnob, Knob } from "./knob";
 import { oscillator, Filter, Envelope, LFO, MiscParams } from "./parameters";
 import { Sequencer, Step, MotionSlotParams, Note, SequencerEvent } from "./sequencer";
-import { DutySwitch, EnvelopeSwitch, LFOModeSwitch, OctaveSwitch, OnOffSwitch, PercentSwitch, StepResolutionSwith, Switch, TargetSwitch, TARGET_SWITCH_TYPE, WaveTypeSwitch, WAVE_TYPE_SWITCH_OSCILLATOR } from "./switch";
+import { DutySwitch, EnvelopeSwitch, LFOModeSwitch, OctaveSwitch, OnOffSwitch, PercentSwitch, StepResolutionSwith, Switch, TargetSwitch, TARGET, WaveTypeSwitch, OSCILLATOR } from "./switch";
 import { addLowerBits, bin, getBits } from "./utilities";
 
 Array.prototype.toString = function () {
@@ -10,14 +10,14 @@ Array.prototype.toString = function () {
 };
 
 export class Monologue {
-  patchName: string;
-  drive: Knob;
-  oscillators: any;
-  filter: any;
-  envelope: any;
-  lfo: any;
-  misc: any;
-  sequencer: any;
+  patchName: string
+  drive: Knob
+  oscillators: oscillator[]
+  filter: Filter
+  envelope: Envelope
+  lfo: LFO
+  misc: MiscParams
+  sequencer: Sequencer
 
   constructor(
     patchName: string,
@@ -98,7 +98,7 @@ export class Monologue {
     function oscOneFromSysEx(data: number[]) {
       // Waveform
       const wave = new WaveTypeSwitch(
-        WAVE_TYPE_SWITCH_OSCILLATOR.VCO1,
+        OSCILLATOR.VCO1,
         getBits(data[30], 6, 7)
       );
 
@@ -116,7 +116,7 @@ export class Monologue {
     function oscTwoFromSysEx(data: number[]) {
       // Waveform
       const wave = new WaveTypeSwitch(
-        WAVE_TYPE_SWITCH_OSCILLATOR.VCO2,
+        OSCILLATOR.VCO2,
         getBits(data[31], 6, 7)
       );
 
@@ -161,7 +161,7 @@ export class Monologue {
 
       // target
       const target = new TargetSwitch(
-        TARGET_SWITCH_TYPE.ENVELOPE,
+        TARGET.ENVELOPE,
         getBits(data[34], 6, 7)
       );
 
@@ -171,7 +171,7 @@ export class Monologue {
     function lfoFromSysEx(data: number[]) {
       // wave
       const wave = new WaveTypeSwitch(
-        WAVE_TYPE_SWITCH_OSCILLATOR.LFO,
+        OSCILLATOR.LFO,
         getBits(data[36], 0, 1)
       );
 
@@ -189,7 +189,7 @@ export class Monologue {
 
       // TargetSwitch
       const target = new TargetSwitch(
-        TARGET_SWITCH_TYPE.LFO,
+        TARGET.LFO,
         getBits(data[36], 4, 5)
       );
 
