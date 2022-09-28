@@ -1,5 +1,5 @@
 {
-  "name": "MonologueLibrarian",
+  "name": "monologue-librarian",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/agawley/MonologueLibrarian.git",
@@ -9,40 +9,13 @@
   },
   "devDependencies": {
     "eslint": "^6.5.1",
-    "jest": "^23.6.0"
+    "jest": "^23.6.0",
+    "typescript": "^4.8.4",
+    "@types/jest": "^29.0.3",
+    "@types/node": "^18.7.23"
   },
   "dependencies": {
     "csv-parse": "^4.4.6",
     "easymidi": "^1.0.2"
-  },
-  "eslintConfig": {
-    "parserOptions": {
-        "ecmaVersion": 6,
-        "sourceType": "module"
-    },
-    "env": {
-        "browser": true,
-        "node": true,
-        "es6": true
-    },
-    "extends": "eslint:recommended",
-    "globals": {
-        "it": false,
-        "describe": false,
-        "expect": false,
-        "jest": false,
-        "afterAll": false,
-        "beforeAll": false,
-        "chrome": false
-    },
-    "rules": {
-        "semi": ["error", "always"],
-        "no-var": "error",
-        "prefer-const": ["error", {
-            "destructuring": "any",
-            "ignoreReadBeforeAssign": false
-        }],
-        "sort-imports": "error"
-      }
   }
 }
