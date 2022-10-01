@@ -1,4 +1,12 @@
 //TODO: Add Int checking
+/**
+ * Place more complex annotations (like "implements" and "template")
+ * on their own lines.  Multiple simple tags (like "export" and "final")
+ * may be combined in one line.
+ * @export @final
+ * @implements {Iterable<TYPE>}
+ * @template TYPE
+ */
 export const bin = (dec: number, padding?: number) => {
   return dec.toString(2).padStart(padding || 8,'0');
 }

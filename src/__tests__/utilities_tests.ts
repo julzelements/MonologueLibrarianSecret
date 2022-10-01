@@ -85,7 +85,7 @@ describe("Utilities tests", () => {
     });
     it("correctly returns 8-bit number from 2 8-bit numbers using arbitrary digit of second to replace high bit of first", () => {
       const testValueLowBits = 111; // 0b1101111
-      const testValueHighBit = 83; // 0b1010011
+      const testValueHighBit = 83; //  0b1010011
       const expectedResponse = 111; // 0b01101111
       expect(addHighBit(testValueLowBits, testValueHighBit, 5)).toEqual(
         expectedResponse
