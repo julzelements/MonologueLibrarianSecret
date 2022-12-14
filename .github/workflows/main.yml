@@ -1,10 +1,24 @@
-name: Test
-on: [push]
+name: Node.js CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  build:
+
+    runs-on: macos-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
       - name: Test
-        uses: onichandame/node-test-action@master
+        run: yarn test
