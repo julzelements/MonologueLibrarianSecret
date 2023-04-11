@@ -7,7 +7,9 @@
  * @implements {Iterable<TYPE>}
  * @template TYPE
  */
-export const bin = (dec: number, padding?: number) => {
+export const bin = (dec: number, padding?: number): string => {
+  const binaryWithoutPadding = dec.toString(2);
+  const result = dec.toString(2).padStart(padding || 8,'0');
   return dec.toString(2).padStart(padding || 8,'0');
 }
 

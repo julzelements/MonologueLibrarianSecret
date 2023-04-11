@@ -18,6 +18,16 @@ describe("Utilities tests", () => {
       const expectedResponse = "0010100";
       expect(bin(testValue, 7)).toEqual(expectedResponse);
     });
+    it("returns 7 bit zero-padded binary representation when passed padding variable", () => {
+      const testValue = 127;
+      const expectedResponse = "1111111";
+      expect(bin(testValue, 7)).toEqual(expectedResponse);
+    });
+    it("cannot pad a binary number greater than 127 when passed padding variable", () => {
+      const testValue = 128;
+      const expectedResponse = "10000000";
+      expect(bin(testValue, 7)).toEqual(expectedResponse);
+    });
   });
   describe("getBits()", () => {
     it("returns the number represented by the binary digits at a mid section slice", () => {

@@ -19,12 +19,12 @@ describe("Snapshot test", () => {
   it("renders the sample_program_dump correctly", () => {
     const records = parse(file)[0];
     const data = transformDataFrom7BitTo8Bit(records);
-    const bytes = printBytes(data)
-
-    fs.writeFileSync(`${__dirname}/transformed_bytes.csv`, bytes.join("\n"));
-    const nibbles = bytes.map((byte) => [byte.slice(0, 4), byte.slice(3, 4)]);
-    const hex = data.map((decimal) => parseInt(decimal).toString(16));
-    console.log(JSON.stringify(data));
+  
+    // const bytes = printBytes(data)
+    // fs.writeFileSync(`${__dirname}/transformed_bytes.csv`, bytes.join("\n"));
+    // const nibbles = bytes.map((byte) => [byte.slice(0, 4), byte.slice(3, 4)]);
+    // const hex = data.map((decimal) => parseInt(decimal).toString(16));
+    // console.log(JSON.stringify(data));
     expect(Monologue.createFromSysEx(data).toString()).toMatchSnapshot();
   });
 });

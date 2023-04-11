@@ -5,7 +5,7 @@ export const prettyPrintBinary = (decimals: number[]): string => {
     .join("\n");
 };
 
-export const printPrintBytes = (records: any[]) => {
+export const prettyPrintBytes = (records: any[]) => {
   return records.map((decimal, index) => {
     const paddedHex = `00${parseInt(decimal).toString(16).toUpperCase()}`.slice(-2);
     const paddedBinary = `00000000${parseInt(decimal).toString(2)}`.slice(-8);

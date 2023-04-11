@@ -1,22 +1,30 @@
-const transformDataFrom7BitTo8Bit = require('./utilities').transformDataFrom7BitTo8Bit;
-const Monologue = require('./monologue');
+import { transformDataFrom7BitTo8Bit } from "./utilities";
+import { Monologue } from "./monologue";
 
-const fs = require('fs')
+const fs = require("fs");
 
-const storeData = (data, path) => {
+const storePatch = (data, path) => {
   try {
-    fs.writeFileSync(path, JSON.stringify(data))
+    fs.writeFileSync(path, JSON.stringify(data));
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
-}
+};
 
-const easymidi = require('easymidi');
-const input = new easymidi.Input('monologue KBD/KNOB');
-input.on('sysex', function (msg) {
+const easymidi = require("easymidi");
+const input = new easymidi.Input("monologue KBD/KNOB");
+input.on("sysex", function (msg) {
   const data = transformDataFrom7BitTo8Bit(msg.bytes);
-  const patch = Monologue.createFromSysEx(data)
-  const patchName = patch.patchName.split('\x00')[0]
-  console.log(`saving: ${patchName}`)
-  storeData(patch, `./patches/dutch-bass/${patchName}.json`)
+  const patchString = Buffer.from(
+    data.map((code) => String.fromCharCode(code)).join("")
+  ).toString("base64");
+  const patch = Monologue.createFromSysEx(data);
+  const patchName = patch.patchName.split("\x00")[0]
+  const underscorePatchName = patchName.replace(/\s/g, '_').toString()
+
+  console.log(`saving: ${underscorePatchName}`);
+  fs.writeFileSync(msg.bytes, `./test-patches/${underscorePatchName}-bytes`);
+  fs.writeFileSync(data, `./test-patches/${underscorePatchName}-data`);
+  fs.writeFileSync(patchString, `./test-patches/${underscorePatchName}-string`);
+  storePatch(patch, `./test-patches/${underscorePatchName}.json`);
 });
