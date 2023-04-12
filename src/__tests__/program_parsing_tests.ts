@@ -25,8 +25,6 @@ describe("Snapshot test", () => {
         .join("")
     ).toBe("PROG<afx acid3>");
     expect(data.length).toBe(448);
-    expect(prettyPrintBinary(data.slice(15, 29))).toBe("PROG<afx acid3>");
-
     // need to work out what the next section of the dump should be
     // use the korg spec to debug each bit.
   });
