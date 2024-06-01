@@ -15,16 +15,14 @@ const easymidi = require("easymidi");
 const input = new easymidi.Input("monologue KBD/KNOB");
 input.on("sysex", function (msg) {
   const data = transformDataFrom7BitTo8Bit(msg.bytes);
-  const patchString = Buffer.from(
-    data.map((code) => String.fromCharCode(code)).join("")
-  ).toString("base64");
+  const patchString = Buffer.from(data.map((code) => String.fromCharCode(code)).join("")).toString("base64");
   const patch = Monologue.createFromSysEx(data);
-  const patchName = patch.patchName.split("\x00")[0]
-  const underscorePatchName = patchName.replace(/\s/g, '_').toString()
+  const patchName = patch.patchName.split("\x00")[0];
+  const underscorePatchName = patchName.replace(/\s/g, "_").toString();
 
   console.log(`saving: ${underscorePatchName}`);
-  fs.writeFileSync(msg.bytes, `./test-patches/${underscorePatchName}-bytes`);
-  fs.writeFileSync(data, `./test-patches/${underscorePatchName}-data`);
-  fs.writeFileSync(patchString, `./test-patches/${underscorePatchName}-string`);
+  fs.writeFileSync(`./test-patches/${underscorePatchName}-bytes`, msg.bytes);
+  fs.writeFileSync(`./test-patches/${underscorePatchName}-data`, data);
+  fs.writeFileSync(`./test-patches/${underscorePatchName}-string`, patchString);
   storePatch(patch, `./test-patches/${underscorePatchName}.json`);
 });
