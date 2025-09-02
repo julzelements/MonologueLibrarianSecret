@@ -4,8 +4,10 @@
   "main": "index.js",
   "repository": "https://github.com/agawley/MonologueLibrarian.git",
   "license": "MIT",
+  "engine": "^22.0.0",
   "scripts": {
-    "test": "TZ=Europe/London jest"
+    "test": "TZ=Europe/London jest",
+    "start": "ts-node src/index.ts"
   },
   "devDependencies": {
     "@types/jest": "^29.0.3",
@@ -16,7 +18,7 @@
   },
   "dependencies": {
     "csv-parse": "^4.4.6",
-    "easymidi": "^1.0.2",
+    "easymidi": "^3.1.0",
     "ts-jest": "^29.0.2"
   }
 }

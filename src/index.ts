@@ -11,18 +11,29 @@ const storePatch = (data, path) => {
   }
 };
 
+const storeData = (data, path) => {
+  try {
+    console.log(data);
+    fs.writeFileSync(path, JSON.stringify(data));
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 const easymidi = require("easymidi");
 const input = new easymidi.Input("monologue KBD/KNOB");
 input.on("sysex", function (msg) {
   const data = transformDataFrom7BitTo8Bit(msg.bytes);
   const patchString = Buffer.from(data.map((code) => String.fromCharCode(code)).join("")).toString("base64");
+  console.log(patchString);
   const patch = Monologue.createFromSysEx(data);
   const patchName = patch.patchName.split("\x00")[0];
   const underscorePatchName = patchName.replace(/\s/g, "_").toString();
 
   console.log(`saving: ${underscorePatchName}`);
-  fs.writeFileSync(`./test-patches/${underscorePatchName}-bytes`, msg.bytes);
-  fs.writeFileSync(`./test-patches/${underscorePatchName}-data`, data);
-  fs.writeFileSync(`./test-patches/${underscorePatchName}-string`, patchString);
+  // fs.writeFileSync(`./test-patches/${underscorePatchName}-bytes`, msg.bytes);
+  // fs.writeFileSync(`./test-patches/${underscorePatchName}-data`, data);
+  // fs.writeFileSync(`./test-patches/${underscorePatchName}-string`, patchString);
+  // storeData(data, `./test-patches/${underscorePatchName}-data`);
   storePatch(patch, `./test-patches/${underscorePatchName}.json`);
 });
